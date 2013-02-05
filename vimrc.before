@@ -1,6 +1,15 @@
 " custom <Leader> key
 let mapleader=","
 
-let php_sql_query           = 0 " no SQL syntax highlighting inside strings
-let g:DisableAutoPHPFolding = 1 " no folding for PHP files
-let g:PHP_outdentphpescape  = 0 " indent PHP tags as the surrounding code
+" Disable unwanted plugins {
+	call janus#disable_plugin('supertab')          " replaced by neocomplcache
+	call janus#disable_plugin('snipmate-snippets') " avoid snippet conflicts. we maintain our own
+	call janus#disable_plugin('syntastic') " slow, replaced by checksyntax_vim
+" }
+
+" Disable neocompletecache in sudo {
+if $SUDO_USER != ''
+	call janus#disable_plugin('plugin.neocomplcache')
+	call janus#disable_plugin('plugin.neosnippet')
+endif
+" }

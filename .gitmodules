@@ -13,3 +13,18 @@
 [submodule "janus/vim-twig"]
 	path = janus/vim-twig
 	url = git://github.com/evidens/vim-twig.git
+[submodule "janus/neocomplcache"]
+	path = janus/neocomplcache
+	url = git://github.com/Shougo/neocomplcache.git
+[submodule "janus/vim-css3-syntax"]
+	path = janus/vim-css3-syntax
+	url = git://github.com/hail2u/vim-css3-syntax.git
+[submodule "janus/html5.vim"]
+	path = janus/html5.vim
+	url = git://github.com/othree/html5.vim.git
+[submodule "janus/vim-nerdtree-tabs"]
+	path = janus/vim-nerdtree-tabs
+	url = git://github.com/jistr/vim-nerdtree-tabs.git
+[submodule "janus/neosnippet"]
+	path = janus/neosnippet
+	url = git://github.com/Shougo/neosnippet.git

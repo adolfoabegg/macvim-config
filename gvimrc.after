@@ -1,23 +1,15 @@
 " Start without the toolbar
 set guioptions-=T
 
-let g:DisableAutoPHPFolding = 1
 set transparency=1
 set guioptions=aAce
 
 
 "" Solarized color scheme
-"syntax enable
 set background=dark
 colorscheme solarized
 "" END Solarized
 
-"color wombat
-"color ir_black
-"color github
-
-"this one was the previous
-"color desertEx
 
 " Tagbar configuration
 " map <Leader>tb :TagbarToggle<CR>
@@ -28,16 +20,5 @@ au FileType php set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=120
 set guifont=Menlo\ for\ Powerline
 
 
-let php_sql_query           = 0 " no SQL syntax highlighting inside strings
-let g:DisableAutoPHPFolding = 1 " no folding for PHP files
-let g:PHP_outdentphpescape  = 0 " indent PHP tags as the surrounding code
-
-
 "Delete trailing spaces automatically
 autocmd BufWritePre * :%s/\s\+$//e
-
-" restore Cmd-t for tabs and use Cmd-p for ctrlp
-if has('gui_macvim')
-     macmenu &File.New\ Tab key=<D-t>
-     macmenu &File.Print key=<D-S-p>
-endif
