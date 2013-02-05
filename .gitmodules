@@ -1,0 +1,15 @@
+[submodule "janus/PIV"]
+	path = janus/PIV
+	url = git://github.com/spf13/PIV.git
+[submodule "janus/pydoc.vim"]
+	path = janus/pydoc.vim
+	url = git://github.com/fs111/pydoc.vim.git
+[submodule "janus/vim-less"]
+	path = janus/vim-less
+	url = git://github.com/groenewege/vim-less.git
+[submodule "janus/vim-powerline"]
+	path = janus/vim-powerline
+	url = git://github.com/Lokaltog/vim-powerline.git
+[submodule "janus/vim-twig"]
+	path = janus/vim-twig
+	url = git://github.com/evidens/vim-twig.git
