@@ -1,0 +1,6 @@
+" custom <Leader> key
+let mapleader=","
+
+let php_sql_query           = 0 " no SQL syntax highlighting inside strings
+let g:DisableAutoPHPFolding = 1 " no folding for PHP files
+let g:PHP_outdentphpescape  = 0 " indent PHP tags as the surrounding code

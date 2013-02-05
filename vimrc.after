@@ -1,0 +1,38 @@
+call janus#add_mapping('nerdtree', 'map', '<leader>n', ':NERDTreeToggle<CR><CR>')
+call janus#add_mapping('gundotoggle', 'map', '<leader>g', ':GundoToggle<CR>')
+
+" Tagbar configuration
+map <Leader>tb :TagbarToggle<CR>
+
+" Rebuild tags
+map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+
+
+" Buffergator re-mapping
+nnoremap <silent> <Leader>b :BuffergatorToggle<CR>
+
+" make PHP follow the Zend Framework coding standards (http://framework.zend.com/manual/en/coding-standard.php-file-formatting.html)
+au FileType php set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=120
+
+" make Pythong follow PEP8
+au FileType py set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
+
+" Default color scheme
+" color darkspectrum
+
+" :autocmd FileType php set keywordprg=/Users/adolfo/pear/bin/pman "replaced  by PIV
+
+set nocompatible
+set laststatus=2
+let g:Powerline_symbols = 'fancy'
+set t_Co=256
+
+" open buffergator in horizontal window
+let g:buffergator_autoexpand_on_split = 0
+let g:buffergator_viewport_split_policy = "B"
+let g:buffergator_split_size = 15
+
+" Python -  virtualenv awareness
+" see http://sontek.net/blog/detail/turning-vim-into-a-modern-python-ide
+
+
