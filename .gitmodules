@@ -28,3 +28,30 @@
 [submodule "janus/neosnippet"]
 	path = janus/neosnippet
 	url = git://github.com/Shougo/neosnippet.git
+[submodule "janus/sparkup"]
+	path = janus/sparkup
+	url = git://github.com/rstacruz/sparkup.git
+[submodule "sparkup"]
+	path = sparkup
+	url = git://github.com/rstacruz/sparkup.git
+[submodule "janus/checksyntax_vim"]
+	path = janus/checksyntax_vim
+	url = https://github.com/tomtom/checksyntax_vim.git
+[submodule "janus/vim-scala"]
+	path = janus/vim-scala
+	url = https://github.com/derekwyatt/vim-scala.git
+[submodule "janus/autoclose"]
+	path = janus/autoclose
+	url = https://github.com/Townk/vim-autoclose.git
+[submodule "janus/phpcomplete.vim"]
+	path = janus/phpcomplete.vim
+	url = git://github.com/shawncplus/phpcomplete.vim.git
+[submodule "janus/tabular"]
+	path = janus/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule "janus/php.vim"]
+	path = janus/php.vim
+	url = https://github.com/shawncplus/php.vim.git
+[submodule "janus/vim-yankstack"]
+	path = janus/vim-yankstack
+	url = https://github.com/maxbrunsfeld/vim-yankstack.git

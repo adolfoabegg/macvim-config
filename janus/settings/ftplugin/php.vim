@@ -15,8 +15,8 @@ let g:pdv_cfg_Type       = "mixed"
 let g:pdv_cfg_Package    = ""
 let g:pdv_cfg_Package    = ""
 let g:pdv_cfg_Version    = ""
-let g:pdv_cfg_Author     = ""
-let g:pdv_cfg_Copyright  = ""
+let g:pdv_cfg_Author     = "Adolfo Abegg"
+let g:pdv_cfg_Copyright  = "Vendo"
 let g:pdv_cfg_License    = ""
 
 " Whether for PHP5 code PHP4 tags should be set, like @access,... (1|0)?

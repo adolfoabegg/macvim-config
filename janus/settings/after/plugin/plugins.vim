@@ -1,68 +1,113 @@
+
 " Neocomplcache {
 if !janus#is_plugin_disabled('plugin.neocomplcache')
-    let g:acp_enableAtStartup = 0                        " Disable AutoComplPop
+    "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+    " Disable AutoComplPop.
+    let g:acp_enableAtStartup = 0
+    " Use neocomplcache.
+    let g:neocomplcache_enable_at_startup = 1
+    " Use smartcase.
+    let g:neocomplcache_enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplcache_min_syntax_length = 3
+    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-    let g:neocomplcache_enable_at_startup = 1            " Use neocomplcache.
-    let g:neocomplcache_enable_smart_case = 1            " Use smartcase.
-    let g:neocomplcache_enable_camel_case_completion = 1 " Use camel case completion.
-    let g:neocomplcache_enable_underbar_completion = 1   " Use underbar completion.
-    let g:neocomplcache_enable_auto_select = 1           " AutoComplPop like behavior
+    " Enable heavy features.
+    " Use camel case completion.
+    "let g:neocomplcache_enable_camel_case_completion = 1
+    " Use underbar completion.
+    "let g:neocomplcache_enable_underbar_completion = 1
 
-    "let g:neocomplcache_min_syntax_length = 1            " Set minimum syntax keyword length.
+    " Define dictionary.
+    let g:neocomplcache_dictionary_filetype_lists = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'php' : $HOME . '/.vim-php.dict',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+           
 
-    let g:neocomplcache_auto_completion_start_length = 1
-    let g:neocomplcache_enable_prefetch = 1
-
-
-    " Enable heavy omni completion.
-    if !exists('g:neocomplcache_omni_patterns')
-        let g:neocomplcache_omni_patterns = {}
+    " Define keyword.
+    if !exists('g:neocomplcache_keyword_patterns')
+        let g:neocomplcache_keyword_patterns = {}
     endif
-    let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-    "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-    let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-    let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+    let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
-    autocmd VimEnter * call neocomplcache#enable()      " always enable
+    " Plugin key-mappings.
+    inoremap <expr><C-g>     neocomplcache#undo_completion()
+    inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
-    function! g:neocomplcache__start_pre_cache()
-        if exists('b:neocomplcache__pre_cache')
-            return
-        endif
-
-        let b:neocomplcache__pre_cache = 1
-
-        if g:neocomplcache_lock_buffer_name_pattern
-                \ && bufname('%') =~ g:neocomplcache_lock_buffer_name_pattern
-            return
-        endif
-
-        :NeoComplCacheCachingBuffer
-        :NeoComplCacheCachingDictionary
+    " Recommended key-mappings.
+    " <CR>: close popup and save indent.
+    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    function! s:my_cr_function()
+        return neocomplcache#smart_close_popup() . "\<CR>"
+        " For no inserting <CR> key.
+        "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
     endfunction
 
-    " autocmd BufEnter * call g:neocomplcache__start_pre_cache()
+    " <TAB>: completion.
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-    set completeopt-=preview
+    " <C-h>, <BS>: close popup and delete backword char.
+    inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+    inoremap <expr><C-y> neocomplcache#close_popup()."\<ESC>"
+    inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+    
+    " Close popup by <Space>.
+    inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
+
+    " Enable omni completion.
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    
+    " Enable heavy omni completion.
+    "omni completion for PHP sucks hard, HARD! don't use it. Read: https://github.com/Shougo/neocomplcache.vim/issues/391
+    "autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+    "let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+    
+    if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+    endif
+    
+    let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+    let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+    " For perlomni.vim setting.
+    " https://github.com/c9s/perlomni.vim
+    " let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+    
+    
+    "Copied from http://www.karakaram.com/neocomplcache
+    "関数を補完するための区切り文字パターン
+	if !exists('g:neocomplcache_delimiter_patterns')
+	  let g:neocomplcache_delimiter_patterns = {}
+	endif
+	let g:neocomplcache_delimiter_patterns['php'] = ['->', '::', '\']
+
 endif
 " }
 
 " neosnippet {
-	" Plugin key-mappings.
-	imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-	smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-	
-	" SuperTab like snippets behavior.
-	imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-	smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-	
-	" For snippet_complete marker.
-	if has('conceal')
-	  set conceallevel=2 concealcursor=i
-	endif
+    " Plugin key-mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+
+    " SuperTab like snippets behavior.
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+    " For snippet_complete marker.
+    if has('conceal')
+      set conceallevel=2 concealcursor=i
+    endif
 " }
- 
+
 " Tagbar {
     " only show functions in PHP
     let g:tagbar_type_php  = {
@@ -72,7 +117,7 @@ endif
             \ ]
         \ }
 
-    let g:tagbar_ctags_bin = "/opt/local/bin/ctags"         " hardcode path to ctags
+    let g:tagbar_ctags_bin = "/usr/local/bin/ctags"         " hardcode path to ctags
     let g:tagbar_singleclick = 1                            " single- instead of double-click to jump
 
     if has('gui_running')
@@ -80,7 +125,7 @@ endif
         " autocmd BufHidden,BufDelete * :TagbarClose " auto close
     endif
 " }
- 
+
 " NERDTree {
     let g:NERDTreeMinimalUI   = 1 " hide help notice
     let g:NERDTreeChDirMode   = 2 " change CWD to root node

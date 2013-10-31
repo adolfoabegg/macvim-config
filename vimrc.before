@@ -1,15 +1,25 @@
 " custom <Leader> key
 let mapleader=","
 
+let g:neocomplcache_enable_at_startup = 1            " Use neocomplcache.
+
 " Disable unwanted plugins {
-	call janus#disable_plugin('supertab')          " replaced by neocomplcache
-	call janus#disable_plugin('snipmate-snippets') " avoid snippet conflicts. we maintain our own
-	call janus#disable_plugin('syntastic') " slow, replaced by checksyntax_vim
+    call janus#disable_plugin('supertab')          " replaced by neocomplcache
+    call janus#disable_plugin('snipmate-snippets') " avoid snippet conflicts. we maintain our own
+    "call janus#disable_plugin('syntastic') " slow, replaced by checksyntax_vim
+    call janus#disable_plugin('checksyntax_vim') " slow, replaced by checksyntax_vim
+    call janus#disable_plugin('scala') " disabled just for now
+    "call janus#disable_plugin('plugin.neocomplcache') " slow as hell (only if used with omni completion)
+    call janus#disable_plugin('vim-vroom') " I don't use it.
+    
 " }
 
 " Disable neocompletecache in sudo {
 if $SUDO_USER != ''
 	call janus#disable_plugin('plugin.neocomplcache')
 	call janus#disable_plugin('plugin.neosnippet')
+	call janus#disable_plugin('supertab')
 endif
 " }
+"
+filetype indent plugin on
